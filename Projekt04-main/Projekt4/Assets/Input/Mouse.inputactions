@@ -1,0 +1,34 @@
+{
+    "name": "Mouse",
+    "maps": [
+        {
+            "name": "Mouse",
+            "id": "2ea190c2-22b3-41f8-a4b6-b767f80c1ae3",
+            "actions": [
+                {
+                    "name": "MouseLock",
+                    "type": "PassThrough",
+                    "id": "0ef1b20f-ea9a-4b36-aedc-845c131a8e49",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "549bc770-d58a-484c-8f46-5acdd5d23fcc",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseLock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
