@@ -1,4 +1,5 @@
 using UnityEngine;
+using Projekt04;
 
 public class PlayerLocomotion : MonoBehaviour
 {
@@ -6,15 +7,22 @@ public class PlayerLocomotion : MonoBehaviour
     Vector3 moveDirection;
     #endregion
 
+    #region Bools
+    public bool isSprinting;
+    #endregion
+
     #region Public Vars
-    [SerializeField] private float movementSpeed = 7;
-    [SerializeField] private float rotationSpeed = 15;
+    [Header("MovementSpeeds")]
+    [SerializeField] private float runningSpeed = 5f;
+    [SerializeField] private float walkingSpeed = 1.5f;
+    [SerializeField] private float sprintSpeed = 7f;
+    [SerializeField] private float rotationSpeed = 15f;
     #endregion
 
     #region References
-    [SerializeField]InputController inputController;
-    [SerializeField]Transform cameraObject;
-    [SerializeField]Rigidbody playerRigidbody;
+    [SerializeField] InputController inputController;
+    [SerializeField] Transform cameraObject;
+    [SerializeField] Rigidbody playerRigidbody;
     #endregion
 
     #region Public Functions
@@ -32,7 +40,22 @@ public class PlayerLocomotion : MonoBehaviour
         moveDirection += cameraObject.right * inputController.horizontalInput;
         moveDirection.Normalize();
         moveDirection.y = 0;
-        moveDirection = moveDirection * movementSpeed;
+
+        if (isSprinting==true)
+        {
+            moveDirection = moveDirection * sprintSpeed;
+        }
+        else
+        {
+            if (inputController.moveAmount >= 0.5f)
+            {
+                moveDirection = moveDirection * runningSpeed;
+            }
+            else
+            {
+                moveDirection = moveDirection * walkingSpeed;
+            }
+        }
 
         Vector3 movementVelocity = moveDirection;
         playerRigidbody.velocity = movementVelocity;

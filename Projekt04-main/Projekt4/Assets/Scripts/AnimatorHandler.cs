@@ -12,7 +12,7 @@ public class AnimatorHandler : MonoBehaviour
         vertical = Animator.StringToHash("Vertical");
     }
 
-    public void UpdateAnimatorValues(float horizontalMovement,float verticalMovement)
+    public void UpdateAnimatorValues(float horizontalMovement,float verticalMovement,bool isSprinting)
     {
         //Animation Snapping, so there is no blending between animations/rounding values 
         float snappedHorizontal;
@@ -61,6 +61,12 @@ public class AnimatorHandler : MonoBehaviour
             snappedVertical = 0;
         }
         #endregion
+
+        if (isSprinting)
+        {
+            snappedHorizontal = horizontalMovement;
+            snappedVertical = 2f;
+        }
 
         playerAnim.SetFloat(horizontal, snappedHorizontal,0.1f, Time.deltaTime);
         playerAnim.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);

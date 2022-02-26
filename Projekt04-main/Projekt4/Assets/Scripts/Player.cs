@@ -1,23 +1,26 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace Projekt04
 {
-
-    #region References
-    [SerializeField]InputController inputController;
-    [SerializeField]PlayerLocomotion playerLocomotion;
-    #endregion
-
-    #region Updates
-    private void Update()
+    public class Player : MonoBehaviour
     {
-        inputController.HandleAllInputs();
-    }
 
-    private void FixedUpdate()
-    {
-        playerLocomotion.HandleAllMovement();
+        #region References
+        [SerializeField]InputController inputController;
+        [SerializeField]PlayerLocomotion playerLocomotion;
+        #endregion
 
+        #region Updates
+        private void Update()
+        {
+            inputController.HandleAllInputs();
+        }
+
+        private void FixedUpdate()
+        {
+            playerLocomotion.HandleAllMovement();
+
+        }
+        #endregion
     }
-    #endregion
 }
