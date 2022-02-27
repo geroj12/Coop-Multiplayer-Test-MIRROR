@@ -45,16 +45,13 @@ public class PlayerLocomotion : MonoBehaviour
         {
             moveDirection = moveDirection * sprintSpeed;
         }
+        else if(inputController.moveAmount >= 0.5f)
+        {
+            moveDirection = moveDirection * runningSpeed;
+        }
         else
         {
-            if (inputController.moveAmount >= 0.5f)
-            {
-                moveDirection = moveDirection * runningSpeed;
-            }
-            else
-            {
-                moveDirection = moveDirection * walkingSpeed;
-            }
+            moveDirection = moveDirection * walkingSpeed;
         }
 
         Vector3 movementVelocity = moveDirection;

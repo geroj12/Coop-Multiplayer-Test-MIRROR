@@ -135,6 +135,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""G"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8828317-c4c9-4239-af6e-5da680e5279c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -159,6 +168,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Shift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0112d7ae-1f6b-4d67-bf11-e85160a78c3f"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""G"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -174,6 +194,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Actions
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
         m_Actions_Shift = m_Actions.FindAction("Shift", throwIfNotFound: true);
+        m_Actions_G = m_Actions.FindAction("G", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -300,11 +321,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Actions;
     private IActionsActions m_ActionsActionsCallbackInterface;
     private readonly InputAction m_Actions_Shift;
+    private readonly InputAction m_Actions_G;
     public struct ActionsActions
     {
         private @PlayerControls m_Wrapper;
         public ActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shift => m_Wrapper.m_Actions_Shift;
+        public InputAction @G => m_Wrapper.m_Actions_G;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -317,6 +340,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Shift.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShift;
                 @Shift.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShift;
                 @Shift.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnShift;
+                @G.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnG;
+                @G.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnG;
+                @G.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnG;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -324,6 +350,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Shift.started += instance.OnShift;
                 @Shift.performed += instance.OnShift;
                 @Shift.canceled += instance.OnShift;
+                @G.started += instance.OnG;
+                @G.performed += instance.OnG;
+                @G.canceled += instance.OnG;
             }
         }
     }
@@ -339,5 +368,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IActionsActions
     {
         void OnShift(InputAction.CallbackContext context);
+        void OnG(InputAction.CallbackContext context);
     }
 }
