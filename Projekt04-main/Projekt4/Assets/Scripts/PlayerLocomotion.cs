@@ -1,7 +1,9 @@
 using UnityEngine;
 using Projekt04;
+using Cinemachine;
+using Mirror;
 
-public class PlayerLocomotion : MonoBehaviour
+public class PlayerLocomotion : NetworkBehaviour
 {
     #region Private Vars
     Vector3 moveDirection;
@@ -23,11 +25,23 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] InputController inputController;
     [SerializeField] Transform cameraObject;
     [SerializeField] Rigidbody playerRigidbody;
+
     #endregion
+
+    private void Start()
+    {
+        GameObject mainVirtualCam = GameObject.Find("Camera");
+        CinemachineBrain cinemachineVirtualCamera = mainVirtualCam.GetComponent<CinemachineBrain>();
+        cameraObject = mainVirtualCam.gameObject.transform;
+    }
 
     #region Public Functions
     public void HandleAllMovement()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         HandleMovement();
         HandleRotation();
     }
